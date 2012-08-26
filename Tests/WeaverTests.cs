@@ -18,7 +18,8 @@ public class WeaverTests
     {
         var type = assembly.GetType("Hello");
         var instance = (dynamic)Activator.CreateInstance(type);
-        instance.World();
+
+        Assert.AreEqual("Hello World", instance.World());
     }
 
 #if(DEBUG)

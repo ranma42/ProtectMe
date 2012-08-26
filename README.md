@@ -1,10 +1,14 @@
-## Solution moving parts
+This is a simple solution built as a starter for writing [Fody](https://github.com/SimonCropp/Fody) addins.
 
-### Fody Project
+## The moving parts
 
-#### Assembly Name
+### BasicFodyAddin Project
 
-The project that does the weaving. It outputs a file named SampleFodyAddin.Fody.
+The project that does the weaving. 
+
+#### Output of the project
+
+It outputs a file named SampleFodyAddin.Fody. The '.Fody' suffix is necessary for it to be picked up by Fody.
 
 #### ModuleWeaver
 
@@ -38,7 +42,15 @@ A target assembly to process and then validate with unit tests.
 
 ### Tests  Project
 
-The test assembly contains three parts
+This is where you would place your unit tests. 
+
+Note that it does not reference AssemblyToProcess as this could cause assembly loading issues. However we want to force AssemblyToProcess to be built prior to the Tests project. So in Tests.csproj there is a non-reference dependency to force the build order.
+
+    <ProjectReference Include="..\AssemblyToProcess\AssemblyToProcess.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+
+The test assembly contains three parts.
 
 #### 1. WeaverHelper
 
@@ -46,9 +58,12 @@ A helper class that takes the output of  AssemblyToProcess and uses ModuleWeaver
 
 #### 2. Verifier
 
-A helper class that runs [peverfiy](http://msdn.microsoft.com/en-us/library/62bwd2yd(v=vs.110).aspx) to validate the resultant assembly.
+A helper class that runs [peverfiy](http://msdn.microsoft.com/en-us/library/62bwd2yd.aspx) to validate the resultant assembly.
 
 #### 3. Tests
 
 The actual unit tests that use WeaverHelper and Verifier. It has one test to construct and execute the injected class.
 
+### No reference to Fody
+
+Not that there is no reference to Fody nor are any Fody files included in the solution. Interaction with Fody is done by convention at compile time.
