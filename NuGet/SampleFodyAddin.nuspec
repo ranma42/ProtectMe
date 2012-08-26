@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>SampleFodyAddin.Fody</id>
+    <version>$version$</version>
+    <title>SampleFodyAddin.Fody</title>
+    <authors>Simon Cropp</authors>
+    <owners>Simon Cropp</owners>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+    <projectUrl>http://github.com/SimonCropp/SampleFodyAddin</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A sample Fody add-in.</description>
+    <summary />
+    <language>en-AU</language>
+    <tags>Sample, ILWeaving, Fody, Cecil</tags>
+  </metadata>
+</package>
