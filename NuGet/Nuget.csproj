@@ -12,7 +12,7 @@
     <ConfigurationName>Release</ConfigurationName>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="SampleFodyAddin.nuspec">
+    <None Include="BasicFodyAddin.nuspec">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -24,15 +24,13 @@
   <UsingTask TaskName="PepitaPackage.WeavingTask" AssemblyFile="$(SolutionDir)Tools\PepitaPackage.dll" />
   <Target Name="NuGetBuild" DependsOnTargets="Clean">
     <MakeDir Directories="$(SolutionDir)NuGetBuild" />
-    <Copy SourceFiles="$(SolutionDir)NuGet\SampleFodyAddin.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
-    <Copy SourceFiles="$(SolutionDir)Fody\bin\$(ConfigurationName)\SampleFodyAddin.Fody.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
-    <PepitaPackage.WeavingTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\SampleFodyAddin.Fody.dll" />
+    <Copy SourceFiles="$(SolutionDir)NuGet\BasicFodyAddin.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)Fody\bin\$(ConfigurationName)\BasicFodyAddin.Fody.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <PepitaPackage.WeavingTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\BasicFodyAddin.Fody.dll" />
   </Target>
   <ItemGroup>
     <ProjectReference Include="..\Fody\Fody.csproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <Project>{C3578A7B-09A6-4444-9383-0DEAFA4958BD}</Project>
-      <Name>Fody</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
