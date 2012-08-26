@@ -10,8 +10,7 @@ public class WeaverTests
     [TestFixtureSetUp]
     public void Setup()
     {
-        var weaverHelper = new WeaverHelper();
-        assembly = weaverHelper.Assembly;
+        assembly = WeaverHelper.WeaveAssembly();
     }
 
     [Test]

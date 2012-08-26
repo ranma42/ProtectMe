@@ -15,7 +15,7 @@
     <None Include="SampleFodyAddin.nuspec">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup> 
+  </ItemGroup>
   <Target Name="Clean">
     <RemoveDir Directories="$(SolutionDir)NuGetBuild" />
   </Target>
@@ -31,6 +31,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Fody\Fody.csproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <Project>{C3578A7B-09A6-4444-9383-0DEAFA4958BD}</Project>
+      <Name>Fody</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

@@ -5,9 +5,8 @@ using Mono.Cecil;
 
 public class WeaverHelper
 {
-    public Assembly Assembly { get; set; }
 
-    public WeaverHelper()
+    public static Assembly WeaveAssembly()
     {
         var projectPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"..\..\..\AssemblyToProcess\AssemblyToProcess.csproj"));
         var assemblyPath = Path.Combine(Path.GetDirectoryName(projectPath), @"bin\Debug\AssemblyToProcess.dll");
@@ -27,7 +26,7 @@ public class WeaverHelper
         weavingTask.Execute();
         moduleDefinition.Write(newAssembly);
 
-        Assembly = Assembly.LoadFile(newAssembly);
+        return Assembly.LoadFile(newAssembly);
     }
 
 
