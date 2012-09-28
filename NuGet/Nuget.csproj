@@ -12,9 +12,10 @@
     <ConfigurationName>Release</ConfigurationName>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="BasicFodyAddin.nuspec">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="BasicFodyAddin.nuspec"/>
+    <None Include="install.ps1" />
+    <None Include="uninstall.ps1" />
+    <Content Include="Fody_ToBeDeleted.txt" />
   </ItemGroup>
   <Target Name="Clean">
     <RemoveDir Directories="$(SolutionDir)NuGetBuild" />
@@ -37,12 +38,5 @@
       <Project>{C3578A7B-09A6-4444-9383-0DEAFA4958BD}</Project>
       <Name>BasicFodyAddin</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="install.ps1" />
-    <None Include="uninstall.ps1" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Fody_ToBeDeleted.txt" />
   </ItemGroup>
 </Project>
