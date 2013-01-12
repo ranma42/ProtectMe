@@ -1,4 +1,4 @@
-This is a simple solution built as a starter for writing [Fody](https://github.com/SimonCropp/Fody) addins.
+This is a simple solution built as a starter for writing [Fody](https://github.com/Fody/Fody) addins.
 
 ## The moving parts
 
@@ -24,16 +24,16 @@ In this case a new type is being injected into the target assemlby that looks li
 	    }
 	}
 
-See [ModuleWeaver](https://github.com/SimonCropp/Fody/wiki/ModuleWeaver)
+See [ModuleWeaver](https://github.com/Fody/Fody/wiki/ModuleWeaver)
  for more details.
 
 ### Nuget Project
 
 Fody addins are deployed as [nuget](http://nuget.org/) packages. NugetProject builds the package for SampleFodyAddin as part of a build. The output of this project is placed in *SolutionDir*/NuGetBuild. 
 
-This project uses  [pepita](https://code.google.com/p/pepita/) to construct the package but you could also use nuget.exe.
+This project uses  [pepita](https://github.com/SimonCropp/Pepita) to construct the package but you could also use nuget.exe.
 
-For more information on the nuget structure of Fody addins see [DeployingAddinsAsNugets](https://github.com/SimonCropp/Fody/wiki/DeployingAddinsAsNugets)
+For more information on the nuget structure of Fody addins see [DeployingAddinsAsNugets](https://github.com/Fody/Fody/wiki/DeployingAddinsAsNugets)
 
 
 ### AssemblyToProcess Project
