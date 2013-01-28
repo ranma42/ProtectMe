@@ -22,12 +22,10 @@ public class WeaverTests
         Assert.AreEqual("Hello World", instance.World());
     }
 
-#if(DEBUG)
     [Test]
     public void PeVerify()
     {
         Verifier.Verify(assembly.CodeBase.Remove(0, 8));
     }
-#endif
 
 }
