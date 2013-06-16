@@ -1,3 +1,6 @@
+![Icon](https://raw.github.com/Fody/BasicFodyAddin/master/Icons/package_icon.png)
+
+
 This is a simple solution built as a starter for writing [Fody](https://github.com/Fody/Fody) addins.
 
 ## The moving parts
@@ -67,3 +70,7 @@ The actual unit tests that use WeaverHelper and Verifier. It has one test to con
 ### No reference to Fody
 
 Not that there is no reference to Fody nor are any Fody files included in the solution. Interaction with Fody is done by convention at compile time.
+
+## Icon
+
+<a href="http://thenounproject.com/noun/lego/#icon-No16919" target="_blank">Lego</a> designed by <a href="http://thenounproject.com/timur.zima" target="_blank">Timur Zima</a> from The Noun Project
