@@ -1,6 +1,5 @@
 ![Icon](https://raw.github.com/Fody/BasicFodyAddin/master/Icons/package_icon.png)
 
-
 This is a simple solution built as a starter for writing [Fody](https://github.com/Fody/Fody) addins.
 
 ## The moving parts
