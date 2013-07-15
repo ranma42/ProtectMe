@@ -16,7 +16,7 @@ It outputs a file named SampleFodyAddin.Fody. The '.Fody' suffix is necessary fo
 
 ModuleWeaver.cs is where the target assembly is modified. Fody will pick up this type during a its processing.
 
-In this case a new type is being injected into the target assemlby that looks like this.
+In this case a new type is being injected into the target assembly that looks like this.
 
 	public class Hello
 	{
