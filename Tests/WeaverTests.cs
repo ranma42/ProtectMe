@@ -36,12 +36,17 @@ public class WeaverTests
     }
 
     [Test]
-    public void ValidateHelloWorldIsInjected()
+    public void ValidateProtection()
     {
-        var type = assembly.GetType("Hello");
+        var type = assembly.GetType("AssemblyToProcess.Class2");
         var instance = (dynamic)Activator.CreateInstance(type);
 
-        Assert.AreEqual("Hello World", instance.World());
+	// Can access the public method
+	Assert.DoesNotThrow(delegate { instance.TestPublicMethod(); });
+
+	// Cannot access the protected one
+	Assert.Throws<Microsoft.CSharp.RuntimeBinder.RuntimeBinderException>(
+		delegate { instance.TestProtectedMethod(); });
     }
 
 #if(DEBUG)

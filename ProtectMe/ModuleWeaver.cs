@@ -1,55 +1,82 @@
 ﻿using System;
+using System.Collections.Generic;
+using Mono.Collections.Generic;
 using System.Linq;
 using Mono.Cecil;
 using Mono.Cecil.Rocks;
 using Mono.Cecil.Cil;
 
+public static class IListExtension
+{
+	public static void RemoveAll<T>(this IList<T> c, Func<T,bool> cond)
+	{
+		var newc = c.Where(x => !cond(x)).ToArray();
+
+		c.Clear();
+		foreach (var v in newc)
+			c.Add(v);
+	}
+
+	public static CustomAttribute FindProtectedAttribute(this Collection<CustomAttribute> self)
+	{
+		return self.FirstOrDefault(x => x.AttributeType.FullName == "ProtectionAttributes.ProtectedAttribute");
+	}
+}
+
 public class ModuleWeaver
 {
-    // Will log an informational message to MSBuild
-    public Action<string> LogInfo { get; set; }
+	// Will log an informational message to MSBuild
+	public Action<string> LogInfo { get; set; }
 
-    // An instance of Mono.Cecil.ModuleDefinition for processing
-    public ModuleDefinition ModuleDefinition { get; set; }
+	// An instance of Mono.Cecil.ModuleDefinition for processing
+	public ModuleDefinition ModuleDefinition { get; set; }
 
-    TypeSystem typeSystem;
+	// Init logging delegates to make testing easier
+	public ModuleWeaver()
+	{
+		LogInfo = m => { };
+	}
 
-    // Init logging delegates to make testing easier
-    public ModuleWeaver()
-    {
-        LogInfo = m => { };
-    }
+	public void Execute()
+	{
+		foreach (var type in ModuleDefinition.GetTypes())
+		{
+			ProcessType(type);
+		}
 
-    public void Execute()
-    {
-        typeSystem = ModuleDefinition.TypeSystem;
-        var newType = new TypeDefinition(null, "Hello", TypeAttributes.Public, typeSystem.Object);
+		ModuleDefinition.AssemblyReferences.RemoveAll(x => x.Name == "ProtectionAttributes");
+	}
 
-        AddConstructor(newType);
+	public void ProcessType(TypeDefinition typeDefinition)
+	{
+		foreach (var field in typeDefinition.Fields)
+		{
+			ProcessField(field);
+		}
 
-        AddHelloWorld(newType);
+		foreach (var method in typeDefinition.Methods)
+		{
+			ProcessMethod(method);
+		}
+	}
 
-        ModuleDefinition.Types.Add(newType);
-        LogInfo("Added type 'Hello' with method 'World'.");
-    }
+	static void ProcessField(FieldDefinition field)
+	{
+		var attr = field.CustomAttributes.FindProtectedAttribute();
+		if (attr == null)
+			return;
 
-    void AddConstructor(TypeDefinition newType)
-    {
-        var method = new MethodDefinition(".ctor", MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName, typeSystem.Void);
-        var objectConstructor = ModuleDefinition.Import(typeSystem.Object.Resolve().GetConstructors().First());
-        var processor = method.Body.GetILProcessor();
-        processor.Emit(OpCodes.Ldarg_0);
-        processor.Emit(OpCodes.Call, objectConstructor);
-        processor.Emit(OpCodes.Ret);
-        newType.Methods.Add(method);
-    }
+		field.CustomAttributes.Remove(attr);
+		field.IsFamily = true;
+	}
 
-    void AddHelloWorld( TypeDefinition newType)
-    {
-        var method = new MethodDefinition("World", MethodAttributes.Public, typeSystem.String);
-        var processor = method.Body.GetILProcessor();
-        processor.Emit(OpCodes.Ldstr, "Hello World");
-        processor.Emit(OpCodes.Ret);
-        newType.Methods.Add(method);
-    }
+	static void ProcessMethod(MethodDefinition method)
+	{
+		var attr = method.CustomAttributes.FindProtectedAttribute();
+		if (attr == null)
+			return;
+
+		method.CustomAttributes.Remove(attr);
+		method.IsFamily = true;
+	}
 }
