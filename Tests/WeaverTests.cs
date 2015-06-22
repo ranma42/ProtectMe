@@ -14,8 +14,8 @@ public class WeaverTests
     [TestFixtureSetUp]
     public void Setup()
     {
-        var projectPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"..\..\..\AssemblyToProcess\AssemblyToProcess.csproj"));
-        assemblyPath = Path.Combine(Path.GetDirectoryName(projectPath), @"bin\Debug\AssemblyToProcess.dll");
+        var projectPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"../../../AssemblyToProcess/AssemblyToProcess.csproj"));
+        assemblyPath = Path.Combine(Path.GetDirectoryName(projectPath), @"bin/Debug/AssemblyToProcess.dll");
 #if (!DEBUG)
         assemblyPath = assemblyPath.Replace("Debug", "Release");
 #endif
