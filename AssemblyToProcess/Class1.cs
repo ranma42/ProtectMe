@@ -1,7 +1,21 @@
 ﻿
 namespace AssemblyToProcess
 {
-    class Class1
+    using ProtectionAttributes;
+
+    public class Class1
     {
+	[Protected]
+	public void TestProtectedMethod()
+	{
+	}
+    }
+
+    public class Class2 : Class1
+    {
+	public void TestPublicMethod()
+	{
+	    TestProtectedMethod();
+	}
     }
 }

@@ -41,5 +41,11 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProtectionAttributes\ProtectionAttributes.csproj">
+      <Project>{72FA631A-8B87-4D1B-8184-1E27EB99EC19}</Project>
+      <Name>ProtectionAttributes</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
